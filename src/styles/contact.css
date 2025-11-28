@@ -1,0 +1,35 @@
+.contact{
+    background-image: url('../imgs/contactImg2.png');
+    min-height: 50vh;
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size: cover;
+    display: flex;
+    align-items: center ;
+    justify-content: space-between;
+    flex-direction: column;
+    font-family: 'Montserrat';
+}
+.info{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+}
+.tri{
+    background-color: white;
+    width: 3px;
+    min-height: 12vh;
+    align-self: center;
+    margin-bottom: 1rem;
+}
+.info p {
+    color:white ;
+    text-align: left;
+}
+.header h1{
+    color:#1A8132;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
