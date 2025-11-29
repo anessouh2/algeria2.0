@@ -80,7 +80,8 @@
   font-weight: 500;
 }
 
-.form-group input {
+.form-group input,
+.form-group select {
   width: 100%;
   padding: 0.9rem 1.2rem;
   background: rgba(255, 255, 255, 0.15);
@@ -92,11 +93,21 @@
   backdrop-filter: blur(5px);
 }
 
+.form-group select {
+  cursor: pointer;
+}
+
+.form-group select option {
+  background: #1a4d2e;
+  color: white;
+}
+
 .form-group input::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group select:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.4);
@@ -235,10 +246,10 @@
 }
 
 .map-placeholder {
-  background:  rgba(139, 168, 147, 0.9);
+  background: rgba(139, 168, 147, 0.9);
   backdrop-filter: blur(10px);
   border-radius: 16px;
-  padding: 3rem;
+  padding: 2rem;
   text-align: center;
   color: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -251,6 +262,128 @@
 .map-placeholder p {
   font-size: 1.2rem;
   font-weight: 500;
+  margin: 0;
+}
+
+/* Route Results Styles */
+.route-results {
+  margin-top: 2rem;
+}
+
+.route-summary {
+  background: rgba(139, 168, 147, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color:#1a3d2e ;
+}
+
+.route-summary h3 {
+  color: #1a4d2e;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.route-summary p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.route-summary p strong {
+  color: #1a4d2e;
+  font-weight: 700;
+}
+
+.route-summary p:nth-child(4) { /* Route Type */
+  background: rgba(76, 175, 80, 0.1);
+  padding: 8px;
+  border-radius: 8px;
+  border-left: 4px solid #4CAF50;
+}
+
+.map-container {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1.5rem;
+  border: 2px solid #4CAF50;
+  position: relative;
+}
+
+.map-container::before {
+  content: "🗺️ Interactive Route Map";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(76, 175, 80, 0.9);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 1000;
+}
+
+.map-container iframe {
+  display: block;
+  width: 100%;
+  height: 500px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.route-details {
+  background: rgba(139, 168, 147, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.route-details h3 {
+  color: #1a4d2e;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.route-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.route-item h4 {
+  color: #1a4d2e;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.route-item p {
+  color: #1a3d2e;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.error-message {
+  background: rgba(231, 76, 60, 0.9);
+  color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Responsive Design */
@@ -287,5 +420,240 @@
     width: 40px;
     height: 40px;
     font-size: 1.2rem;
+  }
+
+  .route-summary {
+    padding: 1rem;
+  }
+
+  .route-summary h3 {
+    font-size: 1.2rem;
+  }
+
+  .map-container {
+    height: 350px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .transportation {
+    padding: 0.5rem;
+  }
+
+  .transportation-container {
+    max-width: 100%;
+    padding-top: 3rem;
+  }
+
+  .transportation-header {
+    margin-bottom: 1rem;
+  }
+
+  .transportation-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .transportation-header p {
+    font-size: 0.9rem;
+    max-width: 100%;
+  }
+
+  .transportation-form {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .submit-button {
+    padding: 0.9rem;
+    font-size: 1rem;
+  }
+
+  .transporters-section h2,
+  .best-road-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .transporter-card {
+    padding: 1rem;
+  }
+
+  .transporter-info p {
+    font-size: 0.9rem;
+  }
+
+  .request-button {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem;
+  }
+
+  .route-summary {
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .route-summary h3 {
+    font-size: 1.1rem;
+  }
+
+  .route-summary p {
+    font-size: 0.9rem;
+    margin: 0.4rem 0;
+  }
+
+  .map-container {
+    height: 300px !important;
+  }
+
+  .route-details {
+    padding: 1rem;
+  }
+
+  .route-details h3 {
+    font-size: 1.3rem;
+  }
+
+  .route-item {
+    padding: 0.8rem;
+  }
+
+  .route-item h4 {
+    font-size: 1rem;
+  }
+
+  .route-item p {
+    font-size: 0.9rem;
+  }
+
+  .error-message {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .map-placeholder {
+    padding: 1.5rem;
+    min-height: 250px;
+  }
+
+  .map-placeholder p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .transportation-container {
+    padding-top: 2.5rem;
+  }
+
+  .back-button {
+    top: 0.5rem;
+    left: 0.5rem;
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+
+  .transportation-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .transportation-header p {
+    font-size: 0.85rem;
+  }
+
+  .transportation-form {
+    padding: 0.8rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .submit-button {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .transporters-section h2,
+  .best-road-section h2 {
+    font-size: 1.3rem;
+  }
+
+  .transporters-list {
+    gap: 0.8rem;
+  }
+
+  .transporter-card {
+    padding: 0.8rem;
+  }
+
+  .transporter-info p {
+    font-size: 0.85rem;
+  }
+
+  .request-button {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  .route-summary {
+    padding: 0.7rem;
+  }
+
+  .route-summary h3 {
+    font-size: 1rem;
+  }
+
+  .route-summary p {
+    font-size: 0.85rem;
+  }
+
+  .map-container {
+    height: 250px !important;
+  }
+
+  .route-details {
+    padding: 0.8rem;
+  }
+
+  .route-details h3 {
+    font-size: 1.2rem;
+  }
+
+  .route-item {
+    padding: 0.7rem;
+  }
+
+  .route-item h4 {
+    font-size: 0.95rem;
+  }
+
+  .route-item p {
+    font-size: 0.85rem;
+  }
+
+  .error-message {
+    padding: 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .map-placeholder {
+    padding: 1rem;
+    min-height: 200px;
+  }
+
+  .map-placeholder p {
+    font-size: 1rem;
   }
 }

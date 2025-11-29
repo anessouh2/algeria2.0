@@ -1,6 +1,35 @@
 import "../styles/home.css";
+import { useState, useEffect } from 'react';
+import api from '../api';
 
-export default function Home({ onGoShop, onGoSignin }) {
+export default function Home({ onGoShop, onGoSignin, isLoggedIn, onGoFarmer }) {
+  const [backendStatus, setBackendStatus] = useState('checking');
+
+  useEffect(() => {
+    const checkBackendConnection = async () => {
+      try {
+        // Simple OPTIONS request to check if backend is alive
+        await api.options('/auth/login/', { timeout: 3000 });
+        setBackendStatus('connected');
+      } catch (err) {
+        if (err.response) {
+          // Backend responded (even with 405 error), so it's connected
+          setBackendStatus('connected');
+        } else if (err.code === 'ERR_NETWORK' || err.message.includes('Network Error')) {
+          setBackendStatus('disconnected');
+        } else {
+          // Any other response means backend is running
+          setBackendStatus('connected');
+        }
+      }
+    };
+
+    checkBackendConnection();
+    // Check every 10 seconds
+    const interval = setInterval(checkBackendConnection, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="home" id="home">
       <header className="head">
@@ -33,8 +62,15 @@ export default function Home({ onGoShop, onGoSignin }) {
           </li>
         </ul>
         <div className="signup">
-          <button className="signup-btn" onClick={onGoSignin}>
-            Sign in
+          <div className="backend-status">
+            <span className={`status-indicator ${backendStatus}`}></span>
+            <span className="status-text">
+              {backendStatus === 'checking' ? 'Checking...' : 
+               backendStatus === 'connected' ? 'Connected' : 'Disconnected'}
+            </span>
+          </div>
+          <button className="signup-btn" onClick={isLoggedIn ? onGoFarmer : onGoSignin}>
+            {isLoggedIn ? 'Dashboard' : 'Sign in'}
           </button>
         </div>
       </header>

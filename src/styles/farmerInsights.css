@@ -82,18 +82,167 @@
   color: #8c8c8c;
 }
 
-.submit-button {
-  margin-left: auto;
-  margin-top: 0.4rem;
-  background-color: #3c6b4a;
-  color: #ffffff;
-  border: none;
-  border-radius: 16px;
-  padding: 0.45rem 1.9rem;
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #d32f2f;
   font-size: 0.8rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.predictions-results {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.predictions-results h3 {
+  color: #3c6b4a;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.predictions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.prediction-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.prediction-card.top-pick {
+  border-color: #3c6b4a;
+  background: linear-gradient(135deg, #f0f8f0 0%, #ffffff 100%);
+}
+
+.prediction-rank {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: bold;
+}
+
+.prediction-card h4 {
+  color: #3c6b4a;
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.demand-score {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.score {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #3c6b4a;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.recommendation {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.badge.best {
+  background-color: #4caf50;
+  color: white;
+}
+
+.badge.good {
+  background-color: #ff9800;
+  color: white;
+}
+
+.badge.consider {
+  background-color: #2196f3;
+  color: white;
+}
+
+.prediction-insights {
+  background-color: #e8f5e8;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.prediction-insights h4 {
+  color: #3c6b4a;
+  margin-bottom: 0.5rem;
+}
+
+.prediction-insights p {
+  margin: 0.3rem 0;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.prediction-chart {
+  width: 100%;
+  max-width: 520px;
+  height: 200px;
+  display: flex;
+  align-items: end;
+  justify-content: space-around;
+  padding: 1rem 0;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.chart-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  max-width: 60px;
+}
+
+.bar-fill {
+  width: 100%;
+  background: linear-gradient(180deg, #4caf50 0%, #66bb6a 100%);
+  border-radius: 4px 4px 0 0;
+  min-height: 10px;
+  transition: height 0.5s ease;
+}
+
+.bar-label {
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  font-family: 'Montserrat', sans-serif;
-  cursor: pointer;
+  color: #3c6b4a;
+  text-align: center;
+}
+
+.bar-value {
+  font-size: 0.6rem;
+  color: #666;
+  margin-top: 0.2rem;
 }
 
 .market-section {
@@ -183,10 +332,32 @@
   align-items: center;
 }
 
-.chart-image {
+.waiting-chart {
   width: 75%;
   max-width: 520px;
-  height: auto;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  border: 2px dashed #ddd;
+}
+
+.waiting-message {
+  text-align: center;
+  color: #666;
+}
+
+.waiting-message h3 {
+  color: #3c6b4a;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.waiting-message p {
+  font-size: 0.9rem;
+  margin: 0;
 }
 
 .chart-x-axis {
@@ -214,12 +385,6 @@
   padding-top: 0.8rem;
 }
 
-.stock-details p {
-  font-size: 0.75rem;
-  color: #555;
-  margin: 0.2rem 0;
-}
-
 @media (max-width: 768px) {
   .farmer-insights {
     padding: 1.4rem 1.2rem 2rem;
@@ -227,17 +392,536 @@
 
   .insights-container {
     max-width: 100%;
+    gap: 2rem;
+  }
+
+  .plus-icon {
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
   }
 
   .plan-title {
     font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .plan-description {
+    font-size: 0.85rem;
+    margin-bottom: 1.2rem;
   }
 
   .plan-form-panel {
     padding: 1.4rem 1.3rem 1.1rem;
+    border-radius: 15px;
+    gap: 0.9rem;
   }
 
-  .chart-image {
+  .plan-input {
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+
+  .predictions-results {
+    padding: 1.2rem;
+    border-radius: 10px;
+    margin-bottom: 0.8rem;
+  }
+
+  .predictions-results h3 {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .predictions-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .prediction-card {
+    padding: 0.9rem;
+    border-radius: 6px;
+  }
+
+  .prediction-card h4 {
+    font-size: 1rem;
+    margin: 0.4rem 0;
+  }
+
+  .demand-score {
+    margin: 0.8rem 0;
+  }
+
+  .score {
+    font-size: 1.8rem;
+  }
+
+  .label {
+    font-size: 0.75rem;
+  }
+
+  .prediction-insights {
+    padding: 0.9rem;
+    border-radius: 6px;
+    margin-top: 0.8rem;
+  }
+
+  .prediction-insights h4 {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .prediction-insights p {
+    font-size: 0.75rem;
+    margin: 0.25rem 0;
+  }
+
+  .prediction-chart {
+    height: 180px;
+    padding: 0.8rem 0;
+    border-radius: 6px;
+  }
+
+  .chart-bar {
+    max-width: 50px;
+  }
+
+  .bar-label {
+    font-size: 0.65rem;
+    margin-top: 0.4rem;
+  }
+
+  .bar-value {
+    font-size: 0.55rem;
+    margin-top: 0.15rem;
+  }
+
+  .market-section {
+    gap: 1.2rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  .market-instructions {
+    font-size: 0.75rem;
+  }
+
+  .guidance-boxes {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    margin-top: 0.6rem;
+  }
+
+  .guidance-box {
+    padding: 0.7rem 0.6rem;
+    border-radius: 3px;
+  }
+
+  .guidance-box h3 {
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .guidance-box p {
+    font-size: 0.65rem;
+    margin: 0.15rem 0;
+  }
+
+  .chart-container {
+    gap: 0.6rem;
+    margin-top: 1.4rem;
+  }
+
+  .chart-y-axis,
+  .chart-x-axis {
+    font-size: 0.65rem;
+  }
+
+  .waiting-chart {
     width: 100%;
+    height: 150px;
+    border-radius: 10px;
+  }
+
+  .waiting-message h3 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .waiting-message p {
+    font-size: 0.85rem;
+  }
+
+  .stock-section {
+    gap: 0.7rem;
+    margin-top: 1rem;
+  }
+
+  .stock-details {
+    padding-top: 0.7rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .farmer-insights {
+    padding: 1.2rem 1rem 1.5rem;
+  }
+
+  .insights-container {
+    gap: 1.8rem;
+  }
+
+  .plus-icon {
+    top: 1rem;
+    right: 1rem;
+    width: 28px;
+    height: 28px;
+    font-size: 1.1rem;
+  }
+
+  .plan-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .plan-description {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  .plan-form-panel {
+    padding: 1.2rem 1rem 0.9rem;
+    border-radius: 12px;
+    gap: 0.8rem;
+  }
+
+  .plan-input {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.8rem;
+    border-radius: 6px;
+  }
+
+  .predictions-results {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.6rem;
+  }
+
+  .predictions-results h3 {
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .predictions-grid {
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .prediction-card {
+    padding: 0.8rem;
+    border-radius: 5px;
+  }
+
+  .prediction-card h4 {
+    font-size: 0.95rem;
+    margin: 0.3rem 0;
+  }
+
+  .demand-score {
+    margin: 0.7rem 0;
+  }
+
+  .score {
+    font-size: 1.6rem;
+  }
+
+  .label {
+    font-size: 0.7rem;
+  }
+
+  .prediction-insights {
+    padding: 0.8rem;
+    border-radius: 5px;
+    margin-top: 0.6rem;
+  }
+
+  .prediction-insights h4 {
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .prediction-insights p {
+    font-size: 0.7rem;
+    margin: 0.2rem 0;
+  }
+
+  .prediction-chart {
+    height: 160px;
+    padding: 0.7rem 0;
+    border-radius: 5px;
+  }
+
+  .chart-bar {
+    max-width: 45px;
+  }
+
+  .bar-label {
+    font-size: 0.6rem;
+    margin-top: 0.3rem;
+  }
+
+  .bar-value {
+    font-size: 0.5rem;
+    margin-top: 0.1rem;
+  }
+
+  .market-section {
+    gap: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+  }
+
+  .market-instructions {
+    font-size: 0.7rem;
+    line-height: 1.3;
+  }
+
+  .guidance-boxes {
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+  }
+
+  .guidance-box {
+    padding: 0.6rem 0.5rem;
+  }
+
+  .guidance-box h3 {
+    font-size: 0.7rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .guidance-box p {
+    font-size: 0.6rem;
+    margin: 0.12rem 0;
+  }
+
+  .chart-container {
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+  }
+
+  .chart-y-axis,
+  .chart-x-axis {
+    font-size: 0.6rem;
+  }
+
+  .waiting-chart {
+    height: 130px;
+    border-radius: 8px;
+  }
+
+  .waiting-message h3 {
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .waiting-message p {
+    font-size: 0.8rem;
+  }
+
+  .stock-section {
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+  }
+
+  .stock-details {
+    padding-top: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .farmer-insights {
+    padding: 1rem 0.8rem 1.2rem;
+  }
+
+  .insights-container {
+    gap: 1.5rem;
+  }
+
+  .plus-icon {
+    top: 0.8rem;
+    right: 0.8rem;
+    width: 26px;
+    height: 26px;
+    font-size: 1rem;
+  }
+
+  .plan-title {
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .plan-description {
+    font-size: 0.75rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .plan-form-panel {
+    padding: 1rem 0.8rem 0.7rem;
+    border-radius: 10px;
+    gap: 0.7rem;
+  }
+
+  .plan-input {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.75rem;
+    border-radius: 5px;
+  }
+
+  .predictions-results {
+    padding: 0.8rem;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+  }
+
+  .predictions-results h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .predictions-grid {
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .prediction-card {
+    padding: 0.7rem;
+    border-radius: 4px;
+  }
+
+  .prediction-card h4 {
+    font-size: 0.9rem;
+    margin: 0.25rem 0;
+  }
+
+  .demand-score {
+    margin: 0.6rem 0;
+  }
+
+  .score {
+    font-size: 1.4rem;
+  }
+
+  .label {
+    font-size: 0.65rem;
+  }
+
+  .prediction-insights {
+    padding: 0.7rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+  }
+
+  .prediction-insights h4 {
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .prediction-insights p {
+    font-size: 0.65rem;
+    margin: 0.15rem 0;
+  }
+
+  .prediction-chart {
+    height: 140px;
+    padding: 0.6rem 0;
+    border-radius: 4px;
+  }
+
+  .chart-bar {
+    max-width: 40px;
+  }
+
+  .bar-label {
+    font-size: 0.55rem;
+    margin-top: 0.25rem;
+  }
+
+  .bar-value {
+    font-size: 0.45rem;
+    margin-top: 0.08rem;
+  }
+
+  .market-section {
+    gap: 0.8rem;
+  }
+
+  .section-title {
+    font-size: 1rem;
+  }
+
+  .market-instructions {
+    font-size: 0.65rem;
+  }
+
+  .guidance-boxes {
+    gap: 0.5rem;
+    margin-top: 0.4rem;
+  }
+
+  .guidance-box {
+    padding: 0.5rem 0.4rem;
+  }
+
+  .guidance-box h3 {
+    font-size: 0.65rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .guidance-box p {
+    font-size: 0.55rem;
+    margin: 0.1rem 0;
+  }
+
+  .chart-container {
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+
+  .chart-y-axis,
+  .chart-x-axis {
+    font-size: 0.55rem;
+  }
+
+  .waiting-chart {
+    height: 110px;
+    border-radius: 6px;
+  }
+
+  .waiting-message h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .waiting-message p {
+    font-size: 0.75rem;
+  }
+
+  .stock-section {
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+  }
+
+  .stock-details {
+    padding-top: 0.5rem;
   }
 }

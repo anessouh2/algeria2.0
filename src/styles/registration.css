@@ -180,5 +180,128 @@
 
     .registration-title {
         font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .registration-form {
+        gap: 0.8rem;
+    }
+
+    .registration-input {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .registration-button {
+        width: 140px;
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .registration {
+        padding: 1rem;
+    }
+
+    .registration-overlay {
+        max-width: 100%;
+        border-radius: 20px;
+        padding: 0.2rem;
+    }
+
+    .registration-card {
+        border-radius: 18px;
+        min-height: 500px;
+    }
+
+    .registration-left {
+        padding: 1.5rem 1.2rem;
+    }
+
+    .registration-title {
+        font-size: 1.4rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .registration-form {
+        gap: 0.7rem;
+    }
+
+    .registration-label {
+        font-size: 0.8rem;
+        margin-bottom: 0.15rem;
+    }
+
+    .registration-input {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        border-radius: 25px;
+    }
+
+    .registration-secondary {
+        margin-top: 1rem;
+        font-size: 0.8rem;
+    }
+
+    .registration-button {
+        margin-top: 1.1rem;
+        width: 120px;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+        border-radius: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .registration {
+        padding: 0.8rem;
+    }
+
+    .registration-overlay {
+        border-radius: 15px;
+        padding: 0.15rem;
+    }
+
+    .registration-card {
+        border-radius: 15px;
+        min-height: 450px;
+    }
+
+    .registration-left {
+        padding: 1.2rem 1rem;
+    }
+
+    .registration-title {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    .registration-form {
+        gap: 0.6rem;
+    }
+
+    .registration-label {
+        font-size: 0.75rem;
+        margin-bottom: 0.1rem;
+    }
+
+    .registration-input {
+        padding: 0.55rem 0.9rem;
+        font-size: 0.8rem;
+        border-radius: 20px;
+    }
+
+    .registration-secondary {
+        margin-top: 0.9rem;
+        font-size: 0.75rem;
+    }
+
+    .registration-button {
+        margin-top: 1rem;
+        width: 110px;
+        padding: 0.65rem 1.1rem;
+        font-size: 0.85rem;
+        border-radius: 20px;
     }
 }

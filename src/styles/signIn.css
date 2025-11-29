@@ -151,6 +151,7 @@
     .signin-card{
         grid-template-columns: 1fr;
         height: auto;
+        min-height: 400px;
     }
 
     .signin-right{
@@ -159,6 +160,133 @@
 
     .signin-left{
         padding: 2.4rem 2rem;
+    }
+
+    .signin-title{
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .signin-form{
+        gap: 1rem;
+    }
+
+    .signin-input{
+        padding: 0.75rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .signin-button{
+        width: 140px;
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 576px){
+    .sign-in{
+        padding: 1rem;
+    }
+
+    .signin-overlay{
+        max-width: 100%;
+        border-radius: 20px;
+        padding: 0.2rem;
+    }
+
+    .signin-card{
+        border-radius: 18px;
+        min-height: 380px;
+    }
+
+    .signin-left{
+        padding: 1.8rem 1.5rem;
+    }
+
+    .signin-title{
+        font-size: 1.8rem;
+        margin-bottom: 1.8rem;
+    }
+
+    .signin-form{
+        gap: 0.9rem;
+    }
+
+    .signin-label{
+        font-size: 0.85rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .signin-input{
+        padding: 0.65rem 1rem;
+        font-size: 0.9rem;
+        border-radius: 25px;
+    }
+
+    .signin-secondary{
+        margin-top: 1.3rem;
+        font-size: 0.8rem;
+    }
+
+    .signin-button{
+        margin-top: 1.5rem;
+        width: 120px;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+        border-radius: 25px;
+    }
+}
+
+@media (max-width: 480px){
+    .sign-in{
+        padding: 0.8rem;
+    }
+
+    .signin-overlay{
+        border-radius: 15px;
+        padding: 0.15rem;
+    }
+
+    .signin-card{
+        border-radius: 15px;
+        min-height: 350px;
+    }
+
+    .signin-left{
+        padding: 1.5rem 1.2rem;
+    }
+
+    .signin-title{
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .signin-form{
+        gap: 0.8rem;
+    }
+
+    .signin-label{
+        font-size: 0.8rem;
+        margin-bottom: 0.15rem;
+    }
+
+    .signin-input{
+        padding: 0.6rem 0.9rem;
+        font-size: 0.85rem;
+        border-radius: 20px;
+    }
+
+    .signin-secondary{
+        margin-top: 1.1rem;
+        font-size: 0.75rem;
+    }
+
+    .signin-button{
+        margin-top: 1.3rem;
+        width: 110px;
+        padding: 0.65rem 1.1rem;
+        font-size: 0.85rem;
+        border-radius: 20px;
     }
 }
 

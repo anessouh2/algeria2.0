@@ -1,10 +1,41 @@
 import '../styles/registration.css'
+import { useState } from 'react'
+import { authAPI } from '../api'
 
 export default function Registration({ onBackToSignin, onRegister }) {
-    const handleSubmit = (e) => {
+    const [formData, setFormData] = useState({
+        username: '',
+        email: '',
+        phone: '',
+        password: '',
+        password_confirm: '',
+        user_type: 'farmer',
+        address: '',
+        wilaya: '',
+        commune: ''
+    })
+    const [error, setError] = useState('')
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        if (onRegister) {
-            onRegister()
+        try {
+            const response = await authAPI.register(formData)
+            // Store tokens from registration
+            localStorage.setItem('access_token', response.data.tokens.access)
+            localStorage.setItem('refresh_token', response.data.tokens.refresh)
+            if (onRegister) {
+                onRegister()
+            }
+        } catch (err) {
+            setError(err.response?.data?.message || 'Registration failed')
+            console.error('Registration error:', err.response?.data)
         }
     }
 
@@ -18,38 +49,84 @@ export default function Registration({ onBackToSignin, onRegister }) {
                             <label className="registration-label">Username</label>
                             <input
                                 type="text"
+                                name="username"
                                 className="registration-input"
-                                placeholder=""
+                                value={formData.username}
+                                onChange={handleChange}
+                                required
+                            />
+
+                            <label className="registration-label">Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                className="registration-input"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
                             />
 
                             <label className="registration-label">Phone number</label>
                             <input
                                 type="tel"
+                                name="phone"
                                 className="registration-input"
-                                placeholder=""
+                                value={formData.phone}
+                                onChange={handleChange}
+                                required
                             />
 
                             <label className="registration-label">Password</label>
                             <input
                                 type="password"
+                                name="password"
                                 className="registration-input"
-                                placeholder=""
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                            />
+
+                            <label className="registration-label">Confirm Password</label>
+                            <input
+                                type="password"
+                                name="password_confirm"
+                                className="registration-input"
+                                value={formData.password_confirm}
+                                onChange={handleChange}
+                                required
                             />
 
                             <label className="registration-label">Address</label>
                             <input
                                 type="text"
+                                name="address"
                                 className="registration-input"
-                                placeholder=""
+                                value={formData.address}
+                                onChange={handleChange}
+                                required
                             />
 
-                            <label className="registration-label">Age</label>
+                            <label className="registration-label">Wilaya</label>
                             <input
-                                type="number"
+                                type="text"
+                                name="wilaya"
                                 className="registration-input"
-                                placeholder=""
+                                value={formData.wilaya}
+                                onChange={handleChange}
+                                required
                             />
 
+                            <label className="registration-label">Commune</label>
+                            <input
+                                type="text"
+                                name="commune"
+                                className="registration-input"
+                                value={formData.commune}
+                                onChange={handleChange}
+                                required
+                            />
+
+                            {error && <p className="error">{error}</p>}
                             <button type="submit" className="registration-button">
                                 Submit
                             </button>

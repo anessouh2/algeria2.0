@@ -1,15 +1,17 @@
 import '../styles/newProduct.css'
 import { useState } from 'react'
+import { farmerAPI } from '../api'
 
 export default function Newproduct({ onBack }) {
     const [formData, setFormData] = useState({
-        productName: '',
+        name: '',
         category: '',
         description: '',
-        farmerName: '',
-        quantity: '',
-        unitPrice: ''
+        quantity: '0',
+        unit_price: ''
     })
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -19,9 +21,63 @@ export default function Newproduct({ onBack }) {
         }))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('Form Data:', formData)
+        setError('')
+        setSuccess('')
+        
+        // Prepare data for backend - only include fields that match the model
+        const productData = {
+            name: formData.name,
+            description: formData.description,
+            unit_price: parseFloat(formData.unit_price),
+            quantity: parseFloat(formData.quantity) || 0,
+            unit: 'kg',
+            is_active: true
+        }
+        
+        // Only add category if it's a valid number
+        if (formData.category && !isNaN(formData.category)) {
+            productData.category = parseInt(formData.category)
+        }
+        
+        try {
+            console.log('Submitting product data:', productData)
+            const response = await farmerAPI.addProduct(productData)
+            console.log('Product added successfully:', response.data)
+            setSuccess('✓ Product added successfully!')
+            setFormData({
+                name: '',
+                category: '',
+                description: '',
+                quantity: '0',
+                unit_price: ''
+            })
+            // Clear success message after 5 seconds
+            setTimeout(() => setSuccess(''), 5000)
+        } catch (err) {
+            let errorMsg = 'Failed to add product. Please try again.'
+            
+            if (err.response?.data) {
+                const errorData = err.response.data
+                if (typeof errorData === 'object') {
+                    // Extract field-specific errors
+                    const errors = Object.entries(errorData)
+                        .map(([field, msgs]) => `${field}: ${Array.isArray(msgs) ? msgs.join(', ') : msgs}`)
+                        .join('; ')
+                    errorMsg = errors || errorMsg
+                } else if (typeof errorData === 'string') {
+                    errorMsg = errorData
+                } else if (errorData.detail) {
+                    errorMsg = errorData.detail
+                }
+            }
+            
+            setError(errorMsg)
+            console.error('Add product error:', err.response?.data)
+            // Clear error message after 8 seconds
+            setTimeout(() => setError(''), 8000)
+        }
     }
 
     const handleBack = () => {
@@ -47,27 +103,25 @@ export default function Newproduct({ onBack }) {
                     </button>
                     <form className='product-form' onSubmit={handleSubmit}>
                         <div className='form-group'>
-                            <label htmlFor='productName'>Product Name:</label>
+                            <label htmlFor='name'>Product Name:</label>
                             <input
                                 type='text'
-                                id='productName'
-                                name='productName'
-                                value={formData.productName}
+                                id='name'
+                                name='name'
+                                value={formData.name}
                                 onChange={handleChange}
                                 placeholder='Enter the name of the product'
                                 required
                             />
                         </div>
                         <div className='form-group'>
-                            <label htmlFor='category'>category:</label>
+                            <label htmlFor='category'>Category (optional):</label>
                             <input
                                 type='text'
                                 id='category'
                                 name='category'
                                 value={formData.category}
                                 onChange={handleChange}
-                                placeholder='Enter category'
-                                required
                             />
                         </div>
                         <div className='form-group'>
@@ -79,18 +133,6 @@ export default function Newproduct({ onBack }) {
                                 onChange={handleChange}
                                 placeholder='Enter product description'
                                 rows='4'
-                                required
-                            />
-                        </div>
-                        <div className='form-group'>
-                            <label htmlFor='farmerName'>Farmer Name:</label>
-                            <input
-                                type='text'
-                                id='farmerName'
-                                name='farmerName'
-                                value={formData.farmerName}
-                                onChange={handleChange}
-                                placeholder='Enter Your full name'
                                 required
                             />
                         </div>
@@ -108,19 +150,29 @@ export default function Newproduct({ onBack }) {
                             />
                         </div>
                         <div className='form-group'>
-                            <label htmlFor='unitPrice'>Unit price:</label>
+                            <label htmlFor='unit_price'>Unit price:</label>
                             <input
                                 type='number'
-                                id='unitPrice'
-                                name='unitPrice'
-                                value={formData.unitPrice}
+                                id='unit_price'
+                                name='unit_price'
+                                value={formData.unit_price}
                                 onChange={handleChange}
-                                placeholder='Enter the price per 1kg'
+                                placeholder='Enter the price per unit'
                                 min='0'
                                 step='0.01'
                                 required
                             />
                         </div>
+                        {error && (
+                            <div className="error-message">
+                                <p className="error">{error}</p>
+                            </div>
+                        )}
+                        {success && (
+                            <div className="success-message">
+                                <p className="success">{success}</p>
+                            </div>
+                        )}
                         <button type='submit' className='publish-button'>
                             Publish product
                         </button>

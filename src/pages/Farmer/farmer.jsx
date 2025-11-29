@@ -21,10 +21,11 @@ const cards = [
   },
 ];
 
-export default function Farmer({ onAddNewProduct, onMarketInsights, onTransportation, onBackToLanding }) {
+export default function Farmer({ onAddNewProduct, onMarketInsights, onTransportation, onBackToLanding, onLogout }) {
   return (
     <section className="farmer">
       <button className="plus-icon" onClick={onBackToLanding}>⇽</button>
+      <button className="logout-btn" onClick={onLogout}>Logout</button>
       <div className="farmer-overlay">
         <div className="farmer-top">
           <h1>Welcome Producer</h1>

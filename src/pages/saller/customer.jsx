@@ -1,6 +1,7 @@
 import "../../styles/customer.css";
 import { useState, useEffect } from 'react';
 import Shop from '../../imgs/shopp.png';
+import { marketAPI } from '../../api';
 
 const initialProducts = [
 
@@ -47,22 +48,55 @@ const initialProducts = [
 ];
 
 export default function Customer({ onNavigateToCard, cart = [], onUpdateCart, onBackToLanding }) {
+  const [allProducts, setAllProducts] = useState(initialProducts);
   const [products, setProducts] = useState(initialProducts);
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await marketAPI.getProducts();
+        // Transform API data to match frontend format
+        const apiProducts = response.data.map(product => ({
+          id: product.id,
+          name: product.name,
+          category: product.category?.name || 'Unknown',
+          farmerName: product.farmer?.farm_name || 'Unknown Farmer',
+          quantity: product.stock?.quantity || 0,
+          unitPrice: product.unit_price,
+          description: product.description,
+          image: product.image || "https://images.unsplash.com/photo-1518977822534-7049a61ee0c2?w=400"
+        }));
+        setAllProducts(apiProducts);
+        setProducts(apiProducts);
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+        // Keep initial products as fallback
+        setAllProducts(initialProducts);
+        setProducts(initialProducts);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
     if (searchQuery.trim() === '') {
-      setProducts(initialProducts);
+      setProducts(allProducts);
     } else {
-      const filtered = initialProducts.filter(product =>
+      const filtered = allProducts.filter(product =>
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.farmerName.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setProducts(filtered);
     }
-  }, [searchQuery]);
+  }, [searchQuery, allProducts]);
 
   const handleAddToCart = (product) => {
     const updatedCart = [...cart, product];
@@ -123,6 +157,7 @@ export default function Customer({ onNavigateToCard, cart = [], onUpdateCart, on
         </div>
         <h2 className="products-title">Available Products</h2>
         <p className="products-subtitle">Here is our available chops for now:</p>
+        {loading && <p>Loading products...</p>}
         <div className="products-grid">
           {products.map((product) => (
             <div className="product-card" key={product.id}>

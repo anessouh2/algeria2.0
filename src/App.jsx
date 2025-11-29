@@ -13,11 +13,16 @@ import Registration from './components/registration'
 function App() {
   const [currentPage, setCurrentPage] = useState('landing')
   const [cart, setCart] = useState([])
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
     const savedCart = localStorage.getItem('customerCart')
     if (savedCart) {
       setCart(JSON.parse(savedCart))
+    }
+    const token = localStorage.getItem('access_token')
+    if (token) {
+      setIsLoggedIn(true)
     }
   }, [])
 
@@ -39,7 +44,7 @@ function App() {
   let content = null
 
   if (currentPage === 'landing') {
-    content = <Landing onGoShop={goCustomer} onGoSignin={goSignin} />
+    content = <Landing onGoShop={goCustomer} onGoSignin={goSignin} isLoggedIn={isLoggedIn} onGoFarmer={goFarmer} />
   } else if (currentPage === 'customer') {
     content = (
       <Customer
@@ -58,7 +63,7 @@ function App() {
       />
     )
   } else if (currentPage === 'signin') {
-    content = <Signin onLogin={goFarmer} onGoToRegistration={goRegistration} />
+    content = <Signin onLogin={goFarmer} onGoToRegistration={goRegistration} setIsLoggedIn={setIsLoggedIn} />
   } else if (currentPage === 'registration') {
     content = <Registration onBackToSignin={goSignin} onRegister={goFarmer} />
   } else if (currentPage === 'farmer') {
@@ -68,6 +73,12 @@ function App() {
         onMarketInsights={goFarmerInsights}
         onTransportation={goTransportation}
         onBackToLanding={goLanding}
+        onLogout={() => {
+          localStorage.removeItem('access_token')
+          localStorage.removeItem('refresh_token')
+          setIsLoggedIn(false)
+          setCurrentPage('landing')
+        }}
       />
     )
   } else if (currentPage === 'newProduct') {

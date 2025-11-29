@@ -1,10 +1,25 @@
 import '../styles/signIn.css'
+import { useState } from 'react'
+import { authAPI } from '../api'
 
-export default function Signin({ onLogin, onGoToRegistration }) {
-  const handleSubmit = (e) => {
+export default function Signin({ onLogin, onGoToRegistration, setIsLoggedIn }) {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (onLogin) {
-      onLogin()
+    try {
+      const response = await authAPI.login(username, password)
+      localStorage.setItem('access_token', response.data.tokens.access)
+      localStorage.setItem('refresh_token', response.data.tokens.refresh)
+      setIsLoggedIn(true)
+      if (onLogin) {
+        onLogin()
+      }
+    } catch (err) {
+      setError('Invalid credentials')
+      console.error('Login error:', err)
     }
   }
 
@@ -19,12 +34,19 @@ export default function Signin({ onLogin, onGoToRegistration }) {
               <input
                 type="text"
                 className="signin-input"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
               />
               <label className="signin-label">Password</label>
               <input
                 type="password"
                 className="signin-input"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
+              {error && <p className="error">{error}</p>}
               <button type="submit" className="signin-button">
                 Log in
               </button>
