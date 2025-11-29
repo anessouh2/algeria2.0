@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=League+Gothic&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap');
+
+.farmer-insights {
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 2rem 2.5rem 3rem;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #e5e5e5;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.plus-icon {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid #3c6b4a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #3c6b4a;
+}
+
+.insights-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.plan-section {
+  margin-top: 0.5rem;
+}
+
+.plan-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #3c6b4a;
+  margin: 0 0 0.6rem 0;
+  text-align: center;
+}
+
+.plan-description {
+  font-size: 0.8rem;
+  color: #777;
+  text-align: center;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
+}
+
+.plan-form-panel {
+  background-color: #f2f2f2;
+  border-radius: 18px;
+  padding: 1.8rem 2rem 1.4rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.plan-input {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+  outline: none;
+}
+
+.plan-input::placeholder {
+  color: #8c8c8c;
+}
+
+.submit-button {
+  margin-left: auto;
+  margin-top: 0.4rem;
+  background-color: #3c6b4a;
+  color: #ffffff;
+  border: none;
+  border-radius: 16px;
+  padding: 0.45rem 1.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+
+.market-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #3c6b4a;
+  margin: 0;
+}
+
+.title-underline {
+  height: 2px;
+  background-color: #3c6b4a;
+  width: 100%;
+}
+
+.market-instructions {
+  font-size: 0.7rem;
+  color: #777;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.guidance-boxes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+
+.guidance-box {
+  background-color: #dedede;
+  border-radius: 4px;
+  padding: 0.8rem 0.7rem;
+}
+
+.guidance-box h3 {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #3c3c3c;
+  margin: 0 0 0.6rem 0;
+}
+
+.guidance-box p {
+  font-size: 0.6rem;
+  color: #555;
+  margin: 0.2rem 0;
+  line-height: 1.4;
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.6rem;
+}
+
+.chart-y-axis {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  color: #555;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+.arrow-up {
+  font-size: 0.9rem;
+}
+
+.chart-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-image {
+  width: 75%;
+  max-width: 520px;
+  height: auto;
+}
+
+.chart-x-axis {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  color: #555;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+.arrow-right {
+  font-size: 0.9rem;
+}
+
+.stock-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+.stock-details {
+  border-top: 1px solid #c4c4c4;
+  padding-top: 0.8rem;
+}
+
+.stock-details p {
+  font-size: 0.75rem;
+  color: #555;
+  margin: 0.2rem 0;
+}
+
+@media (max-width: 768px) {
+  .farmer-insights {
+    padding: 1.4rem 1.2rem 2rem;
+  }
+
+  .insights-container {
+    max-width: 100%;
+  }
+
+  .plan-title {
+    font-size: 2rem;
+  }
+
+  .plan-form-panel {
+    padding: 1.4rem 1.3rem 1.1rem;
+  }
+
+  .chart-image {
+    width: 100%;
+  }
+}

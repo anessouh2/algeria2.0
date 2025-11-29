@@ -1,6 +1,6 @@
 import "../styles/home.css";
 
-export default function Home() {
+export default function Home({ onGoShop, onGoSignin }) {
   return (
     <section className="home" id="home">
       <header className="head">
@@ -20,9 +20,22 @@ export default function Home() {
           <li>
             <a href="#contact">Contact</a>
           </li>
+          <li>
+            <a
+              href="#shop"
+              onClick={(e) => {
+                e.preventDefault()
+                onGoShop && onGoShop()
+              }}
+            >
+              Shop
+            </a>
+          </li>
         </ul>
         <div className="signup">
-          <button className="signup-btn">Sign up</button>
+          <button className="signup-btn" onClick={onGoSignin}>
+            Sign in
+          </button>
         </div>
       </header>
       <div className="heroo">
